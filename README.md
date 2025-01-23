@@ -10,7 +10,8 @@
 
 - Listening to music 🎶
 - My cat, Cyra 🐈  
-<img src='./Cyra.jpg' alt='Calico cat curled up in chair' width='400' height='200'>
+  <img src='./Cyra.jpg' alt='Calico cat curled up in chair' width='400' height='200'>
+
 - Playing games (mostly PC) 💻
 - I also enjoy spending time researching and learning more about cybersecurity threats. 🏴
 
