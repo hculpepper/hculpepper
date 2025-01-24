@@ -8,10 +8,10 @@ sequenceDiagram
     Attacker(Controller)->>BotNet: Instructs to start DDoS attack
     BotNet->>WebServer: Send flooding HTTP requests (SYN flood)
     WebServer->>BotNet: Process incoming traffic request (SYN/ACK part of handshake)
+    WebServer-->>LegimiateUser: Request can't be proccessed (denied service)
     WebServer->>Firewall: Report overload
     Firewall->>Firewall: Traffic analysis
     Firewall->>BotNet: Rate limiting and IP blocking
-    WebServer-->>LegitimateUser: Request can't be proccessed (denied service)
 ```
 
 ## Explanation
@@ -24,6 +24,6 @@ The general steps for this type of attack and mitigation based on the sequence d
 2. The botnet then floods the webserver with fake TCP requests by only sending the first part (SYN) of the three-way handshake.
 3. The webserver tries to process the TCP/IP traffic by sending the second part of the handshake (SYN/ACK) and waiting for an ACK response. The botnet ignores the SYN/ACK response.
 4. The ports for web traffic are then stuck occupied and unable to process real traffic requests from legitimate users, which results in the denial of service to legimate users.
-5. The firewall recieves report of webserver traffic instability.
+5. The firewall recieves report of webserver traffic instability from high volume of SYN packets within a short window of time.
 6. The firewall analyzes the web traffic request to determine the malicious IPs of the botnet.
-7. The firewall blocks the IPs of the botnet attacking the webserver and/or rate limits the number of request coming from the botnet.
+7. The firewall blocks the IPs of the botnet attacking the webserver and/or rate limits the number of request coming from the botnet to reduce the number of request to process while still allowing for legitimate traffic.
