@@ -25,4 +25,5 @@ The general steps for this type of attack and mitigation based on the sequence d
 3. The webserver tries to process the TCP/IP traffic by sending the second part of the handshake (SYN/ACK) and waiting for an ACK response. The botnet ignores the SYN/ACK response.
 4. The ports for web traffic are then stuck occupied and unable to process real traffic requests from legitimate users, which results in the denial of service to legimate users.
 5. The firewall recieves report of webserver traffic instability.
-6. The firewall analyzes the web traffic request to determine the malicious IPs of the botnet. The firewall blocks the IPs of the botnet attacking the webserver and/or rate limits the number of request coming from the botnet.
+6. The firewall analyzes the web traffic request to determine the malicious IPs of the botnet.
+7. The firewall blocks the IPs of the botnet attacking the webserver and/or rate limits the number of request coming from the botnet.
