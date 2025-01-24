@@ -11,7 +11,7 @@ sequenceDiagram
     WebServer->>Firewall: Report overload
     Firewall->>Firewall: Traffic analysis
     Firewall->>BotNet: Rate limiting and IP blocking
-    WebServer-->>LegitimateUser: Blocked (service unavailable)
+    WebServer-->>LegitimateUser: Request can't be proccessed (denied service)
 ```
 
 ## Explanation
