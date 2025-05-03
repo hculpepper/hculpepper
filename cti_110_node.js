@@ -4,14 +4,19 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const path = require("path");
+const cors = require("cors");
 
 // This part sets up the database
 const { Pool } = require("pg");
+
 // You may need to modify the password or database name in the following line:
-const connectionString = `postgres://postgres:CTI_110_WakeTech@localhost/Gradebook`;
-// The default password is CTI_110_WakeTech
-// The default database name is Gradebook
+const connectionString = `postgres://postgres:CTI_110_WakeTech@localhost/Gradebook_Culpepper`;
+
+// This creates a new connection pool to the PostgreSQL database
 const pool = new Pool({ connectionString: connectionString });
+
+// This is the CORS middleware to allow cross-origin requests
+app.use(cors());
 
 // This line says when it's looking for a file linked locally,
 // check in sub-folder "public"
@@ -28,6 +33,7 @@ router.get("/", function (req, res) {
 app.use("/", router);
 
 router.get("/api/grades", function (req, res) {
+  // This function will query the PostgreSQL database and return student and assignment data
   pool.query(
     `SELECT Students.student_id, first_name, last_name, AVG(assignments.grade) as total_grade \
             FROM Students  \
@@ -45,7 +51,8 @@ router.get("/api/grades", function (req, res) {
         console.log(`Grade: ${row.total_grade}`);
       }); // End of forEach
 
-      res.status(200).json(result.rows);
+      // This is the data we're passing in to the frontend
+      res.status(200).json(result.rows); // Send the result back to the client
     }
   );
 });
